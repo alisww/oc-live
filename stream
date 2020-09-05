@@ -1,0 +1,5 @@
+#!/bin/bash
+RATE=${1:-48000}
+PORT=${2:-10000}
+
+rec -e signed-integer -b 8 -c 1 -r "$RATE" -t raw - | ./aucmp | socat - TCP4-LISTEN:"$PORT",reuseaddr
